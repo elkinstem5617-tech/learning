@@ -5,6 +5,7 @@ const books = [
   { title: "War and peace", pages: 1200 },
   { title: "Mumu", pages: 250 },
   { title: "Duna", pages: 330 },
+  { title: "Idiot", pages: 640 },
 ];
 
 const longBooks = books.filter(isLong);
