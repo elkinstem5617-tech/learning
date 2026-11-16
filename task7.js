@@ -1,17 +1,4 @@
-async function getUsers() {
-    try {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users`);
-
-        if (!response.ok) {
-            throw new Error(`Сервер ответил ${response.status}`);
-        }
-        const users = await response.json();
-        return users;
-    } catch (error) {
-        console.log("error", error.message);
-        return [];
-    }
-}
+import { getUsers } from "./api.js"
 
 async function main() {
 
@@ -31,7 +18,7 @@ async function main() {
 
     console.log(`пользователей с biz в email: ${usersHasBiz.length}`);
 
-    console.log(userBizMail[0] )
+    console.log(userBizMail[0])
 }
 
 main();
