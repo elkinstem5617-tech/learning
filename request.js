@@ -1,7 +1,7 @@
-export async function request (address, methodFunc, obj) {
+export async function request (host, address, methodFunc, obj) {
 
     try {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/${address}`, {
+        const response = await fetch(`${host}${address}`, {
             method: methodFunc,
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(obj)
@@ -10,7 +10,7 @@ export async function request (address, methodFunc, obj) {
         console.log(response.status);
         console.log(response.ok);
         const data = await response.json();
-        console.log(data)
+        return data;
     } catch (error) {
         console.log("error", error.message);
     }
