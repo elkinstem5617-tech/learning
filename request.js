@@ -10,8 +10,9 @@ export async function request (host, address, methodFunc, obj) {
         console.log(response.status);
         console.log(response.ok);
         const data = await response.json();
-        return data;
+        return [response.status, data];
     } catch (error) {
         console.log("error", error.message);
+        return[null, error.message]
     }
 }
