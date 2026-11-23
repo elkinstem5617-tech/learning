@@ -28,6 +28,17 @@ app.post("/users", (req, res) => {
     res.status(201).json(newMan);
 });
 
+app.delete("/users/:id", (req, res) => { 
+    const userId = usersList.find((user) => user.id === Number(req.params.id))
+    if (userId){
+        usersList = usersList.filter((deleteUser)=>
+        deleteUser.id !== Number(req.params.id))
+    res.status(200).json("Удален")
+    } else {
+        res.status(404).json({error: `Пользователь с ${req.params.id} не найден}`})
+    }
+})
+
 app.listen(3000, () => {
     console.log("Сервер запущен на http://localhost:3000");
 });
