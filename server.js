@@ -24,20 +24,37 @@ app.get(`/users/:id`, (req, res) => {
 })
 
 app.post("/users", (req, res) => {
-    const newMan = {...req.body, id: ++userLastId};
+    const newMan = { ...req.body, id: ++userLastId };
     usersList.push(newMan);
     res.status(201).json(newMan);
 });
 
-app.delete("/users/:id", (req, res) => { 
+app.delete("/users/:id", (req, res) => {
     const userId = usersList.find((user) => user.id === Number(req.params.id))
-    if (userId){
-        usersList = usersList.filter((deleteUser)=>
-        deleteUser.id !== Number(req.params.id))
-    res.status(200).json("Удален")
+    if (userId) {
+        usersList = usersList.filter((deleteUser) =>
+            deleteUser.id !== Number(req.params.id))
+        res.status(200).json("Удален")
     } else {
-        res.status(404).json({error: `Пользователь с ${req.params.id} не найден}`})
+        res.status(404).json({ error: `Пользователь с ${req.params.id} не найден}` })
     }
+})
+
+app.put("/users/:id", (req, res) => {
+    const userId = usersList.find((user) => user.id === Number(req.params.id));
+    if (!userId) {
+        return res.status(404).json({ error: "Пользователь не найден" });
+    };
+    usersList = usersList.map((user) => {
+        if (user.id === userId.id) {
+            return { ...user, ...req.body };   // изменённый пользователь
+        } else {
+            return user;   // тот же пользователь без изменений
+        }
+    })
+
+    const userChanged = usersList.find((user) => user.id === Number(req.params.id));
+    res.status(200).json(userChanged)
 })
 
 app.listen(3000, () => {

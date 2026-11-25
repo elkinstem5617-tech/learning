@@ -14,7 +14,7 @@ const resultRequest = function(statusFromSite, dataFromSite) {
 
 //resultRequest(status, data);
 
-const [status1, data1] = await request("http://localhost:3000/","users", "POST", newPost);
+const [status1, data1] = await request("http://localhost:3000/","users/22222", "PUT", );
 
 resultRequest(status1, data1);
 
