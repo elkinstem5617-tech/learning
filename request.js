@@ -16,3 +16,4 @@ export async function request (host, address, methodFunc, obj) {
         return[null, error.message]
     }
 }
+

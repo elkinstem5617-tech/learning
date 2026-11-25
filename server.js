@@ -5,6 +5,7 @@ const app = express();
 app.use(express.json());
 
 let usersList = await getUsers();
+let userLastId = usersList.length;
 
 app.get("/", async (req, res) => {
     res.send("Привет, это мой сервер!");
@@ -23,7 +24,7 @@ app.get(`/users/:id`, (req, res) => {
 })
 
 app.post("/users", (req, res) => {
-    const newMan = {...req.body, id: usersList.length + 1};
+    const newMan = {...req.body, id: ++userLastId};
     usersList.push(newMan);
     res.status(201).json(newMan);
 });
